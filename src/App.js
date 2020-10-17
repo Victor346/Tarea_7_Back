@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import './App.css';
+import MenuContainer from './components/MenuContainer'
 
 function App() {
   const [show, setShow] = useState(false);
@@ -46,6 +47,7 @@ function App() {
           </Modal.Footer>
         </Form>
       </Modal>
+      <MenuContainer />
     </div>
   );
 }
