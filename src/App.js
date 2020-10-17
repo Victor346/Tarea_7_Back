@@ -12,7 +12,6 @@ function App() {
   const fetchFromServer = () => {
     axios.get(`http://localhost:3001/pedido`)
       .then((function (response) {
-        console.log(response)
         setPedidos(response.data);
       }))
   }
@@ -24,7 +23,10 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post('http://localhost:3001/pedido', { description: descripcionForm}).then(() => {
+    axios.post('http://localhost:3001/pedido', { description: descripcionForm}).then((result) => {
+      const currentPedidos = pedidos;
+      currentPedidos.push(result.data);
+      setPedidos(currentPedidos);
       setShow(false);
       }
     );

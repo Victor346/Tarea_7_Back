@@ -9,7 +9,6 @@ function PedidoForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(descripcionForm);
     setShow(false);
   }
 

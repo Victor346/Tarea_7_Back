@@ -21,6 +21,14 @@ class MenuContainer extends React.Component {
       ],
       {
         accepts: function (el, target, source, sibling) {
+          const targetState = target.id;
+          const sourceState = source.id;
+          if (sourceState === 'entrega_completada') {
+            return false;
+          }
+          if (targetState === 'salida_de_planta') {
+            return false;
+          }
           return true; // elements can be dropped in any of the containers by default
         },
       });
@@ -29,10 +37,10 @@ class MenuContainer extends React.Component {
         const id = el.children[0].innerHTML;
         axios.put('http://localhost:3001/pedido', { id, to_status:  targetState }).then(
           (result) => {
-            console.log(result);
+            
           } 
         ).catch( () => { 
-            this.props.fetchFromServer();
+            alert('Algo salio mal')
           }
         )
       });
