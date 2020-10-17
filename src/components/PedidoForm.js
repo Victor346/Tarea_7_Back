@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import './App.css';
 
-function App() {
+function PedidoForm() {
   const [show, setShow] = useState(false);
   const [descripcionForm, setDescripcionForm] = useState('');
   
