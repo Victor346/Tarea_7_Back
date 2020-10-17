@@ -1,17 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import './App.css';
 import MenuContainer from './components/MenuContainer'
+import axios from 'axios';
 
 function App() {
   const [show, setShow] = useState(false);
   const [descripcionForm, setDescripcionForm] = useState('');
+  const [pedidos, setPedidos] = useState([]);
   
+  const fetchFromServer = () => {
+    axios.get(`http://localhost:3001/pedido`)
+      .then((function (response) {
+        console.log(response)
+        setPedidos(response.data);
+      }))
+  }
+
+  useEffect(() => {
+    fetchFromServer();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(descripcionForm);
-    setShow(false);
+
+    axios.post('http://localhost:3001/pedido', { description: descripcionForm}).then(() => {
+      setShow(false);
+      }
+    );
+
+    
   }
 
   const handleChange = (e) => setDescripcionForm(e.target.value);
@@ -47,7 +65,7 @@ function App() {
           </Modal.Footer>
         </Form>
       </Modal>
-      <MenuContainer />
+      <MenuContainer pedidos={pedidos} fetchFromServer={fetchFromServer}/>
     </div>
   );
 }
